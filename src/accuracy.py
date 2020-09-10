@@ -50,5 +50,6 @@ def accuracy(n):
 net = Unet(n_channels=1, n_classes=1)
 net.to(device=device)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+#由于训练数据集是在服务器上完成，pytorch版本与本地电脑的版本不一致，导入模型时需要进行一下处理
 net.load_state_dict({k.replace('module.', ''): v for k, v in torch.load("epoch9.pth", map_location=device).items()})
 net.eval()
