@@ -21,13 +21,13 @@ def train_net(net, device, epochs=40, batch_size=8, lr=0.00003,train_loader=trai
         # 按照batch_size开始训练
         for i,(image, label) in enumerate(train_loader):
             # 将数据拷贝到device中
-            image_data = image.reshape(8,1,512,512).to(device=device, dtype=torch.float32)
-            label_data = label.reshape(8,1,512,512).to(device=device, dtype=torch.float32)
+            image_data = image.reshape(batch_size,1,512,512).to(device=device, dtype=torch.float32)
+            label_data = label.reshape(batch_size,1,512,512).to(device=device, dtype=torch.float32)
             # 使用网络参数，输出预测结果
             pred = net(image_data)
             # 计算loss
             loss = criterion(pred, label_data)
-#             writer.add_scalar("loss", loss.item(), global_step=None, walltime=None)
+            #writer.add_scalar("loss", loss.item(), global_step=None, walltime=None)
             print("Epoch:",epoch,'Loss/train:', loss.item(),"num:",i)
             # 保存loss值最小的网络参数
             if loss < best_loss:
