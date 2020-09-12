@@ -40,6 +40,7 @@ def train_net(net, device, epochs=40, batch_size=8, lr=0.00003,train_loader=trai
 
 
 
-model = Unet(1,1)
+model = Unet(1, 1)
+#设置计算设备，如果存在GPU设备则使用GPU
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_net(model.cuda(), device)
